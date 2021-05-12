@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **int64** | When the rule was created, timestamp in milliseconds. | [optional] 
 **CreationAuthorId** | Pointer to **int64** | User ID of the user who created the rule. | [optional] 
 **Filters** | Pointer to [**[]SecurityMonitoringFilter**](SecurityMonitoringFilter.md) | Additional queries to filter matched events before they are processed. | [optional] 
+**HasExtendedTitle** | Pointer to **bool** | Whether the notifications include the triggering group-by values in their title. | [optional] 
 **Id** | Pointer to **string** | The ID of the rule. | [optional] 
 **IsDefault** | Pointer to **bool** | Whether the rule is included by default. | [optional] 
 **IsDeleted** | Pointer to **bool** | Whether the rule has been deleted. | [optional] 
@@ -17,6 +18,8 @@ Name | Type | Description | Notes
 **Options** | Pointer to [**SecurityMonitoringRuleOptions**](SecurityMonitoringRuleOptions.md) |  | [optional] 
 **Queries** | Pointer to [**[]SecurityMonitoringRuleQuery**](SecurityMonitoringRuleQuery.md) | Queries for selecting logs which are part of the rule. | [optional] 
 **Tags** | Pointer to **[]string** | Tags for generated signals. | [optional] 
+**Type** | Pointer to [**SecurityMonitoringRuleType**](SecurityMonitoringRuleType.md) |  | [optional] [default to SECURITYMONITORINGRULETYPE_LOG_DETECTION]
+**UpdateAuthorId** | Pointer to **int64** | User ID of the user who updated the rule. | [optional] 
 **Version** | Pointer to **int64** | The version of the rule. | [optional] 
 
 ## Methods
@@ -137,6 +140,31 @@ SetFilters sets Filters field to given value.
 `func (o *SecurityMonitoringRuleResponse) HasFilters() bool`
 
 HasFilters returns a boolean if a field has been set.
+
+### GetHasExtendedTitle
+
+`func (o *SecurityMonitoringRuleResponse) GetHasExtendedTitle() bool`
+
+GetHasExtendedTitle returns the HasExtendedTitle field if non-nil, zero value otherwise.
+
+### GetHasExtendedTitleOk
+
+`func (o *SecurityMonitoringRuleResponse) GetHasExtendedTitleOk() (*bool, bool)`
+
+GetHasExtendedTitleOk returns a tuple with the HasExtendedTitle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasExtendedTitle
+
+`func (o *SecurityMonitoringRuleResponse) SetHasExtendedTitle(v bool)`
+
+SetHasExtendedTitle sets HasExtendedTitle field to given value.
+
+### HasHasExtendedTitle
+
+`func (o *SecurityMonitoringRuleResponse) HasHasExtendedTitle() bool`
+
+HasHasExtendedTitle returns a boolean if a field has been set.
 
 ### GetId
 
@@ -362,6 +390,56 @@ SetTags sets Tags field to given value.
 `func (o *SecurityMonitoringRuleResponse) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *SecurityMonitoringRuleResponse) GetType() SecurityMonitoringRuleType`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *SecurityMonitoringRuleResponse) GetTypeOk() (*SecurityMonitoringRuleType, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *SecurityMonitoringRuleResponse) SetType(v SecurityMonitoringRuleType)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *SecurityMonitoringRuleResponse) HasType() bool`
+
+HasType returns a boolean if a field has been set.
+
+### GetUpdateAuthorId
+
+`func (o *SecurityMonitoringRuleResponse) GetUpdateAuthorId() int64`
+
+GetUpdateAuthorId returns the UpdateAuthorId field if non-nil, zero value otherwise.
+
+### GetUpdateAuthorIdOk
+
+`func (o *SecurityMonitoringRuleResponse) GetUpdateAuthorIdOk() (*int64, bool)`
+
+GetUpdateAuthorIdOk returns a tuple with the UpdateAuthorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateAuthorId
+
+`func (o *SecurityMonitoringRuleResponse) SetUpdateAuthorId(v int64)`
+
+SetUpdateAuthorId sets UpdateAuthorId field to given value.
+
+### HasUpdateAuthorId
+
+`func (o *SecurityMonitoringRuleResponse) HasUpdateAuthorId() bool`
+
+HasUpdateAuthorId returns a boolean if a field has been set.
 
 ### GetVersion
 

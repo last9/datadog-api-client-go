@@ -10374,6 +10374,8 @@ components:
             notifications:
             - notifications
             - notifications
+          hasExtendedTitle: true
+          updateAuthorId: 1
           filters:
           - query: query
           - query: query
@@ -10403,7 +10405,7 @@ components:
             agentRule:
               expression: expression
               agentRuleId: etc_shadow
-          version: 1
+          version: 5
           tags:
           - tags
           - tags
@@ -10427,6 +10429,8 @@ components:
             notifications:
             - notifications
             - notifications
+          hasExtendedTitle: true
+          updateAuthorId: 1
           filters:
           - query: query
           - query: query
@@ -10456,7 +10460,7 @@ components:
             agentRule:
               expression: expression
               agentRuleId: etc_shadow
-          version: 1
+          version: 5
           tags:
           - tags
           - tags
@@ -10475,7 +10479,7 @@ components:
             total_filtered_count: 1
       properties:
         data:
-          description: TODO.
+          description: Object containing the list of rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
           type: array
@@ -10534,8 +10538,9 @@ components:
       description: Create a new rule.
       example:
         cases: []
+        hasExtendedTitle: true
         isEnabled: true
-        name: ""
+        name: My security monitoring rule.
         options:
           newValueOptions: {}
         filters:
@@ -10559,6 +10564,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -10569,7 +10579,7 @@ components:
           type: string
         name:
           description: The name of the rule.
-          example: ""
+          example: My security monitoring rule.
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
@@ -10588,6 +10598,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleType'
       required:
       - cases
       - isEnabled
@@ -10836,13 +10848,13 @@ components:
           type: string
         query:
           description: Query to run on logs.
-          example: a < 3
+          example: a > 3
           type: string
       required:
       - query
       type: object
     SecurityMonitoringRuleResponse:
-      description: Detection rule.
+      description: Rule.
       example:
         cases:
         - condition: condition
@@ -10855,6 +10867,159 @@ components:
           notifications:
           - notifications
           - notifications
+        hasExtendedTitle: true
+        updateAuthorId: 1
+        filters:
+        - query: query
+        - query: query
+        message: message
+        queries:
+        - distinctFields:
+          - distinctFields
+          - distinctFields
+          metric: metric
+          groupByFields:
+          - groupByFields
+          - groupByFields
+          query: query
+          name: name
+          agentRule:
+            expression: expression
+            agentRuleId: etc_shadow
+        - distinctFields:
+          - distinctFields
+          - distinctFields
+          metric: metric
+          groupByFields:
+          - groupByFields
+          - groupByFields
+          query: query
+          name: name
+          agentRule:
+            expression: expression
+            agentRuleId: etc_shadow
+        version: 5
+        tags:
+        - tags
+        - tags
+        creationAuthorId: 6
+        createdAt: 0
+        isDefault: true
+        isDeleted: true
+        isEnabled: true
+        name: name
+        options:
+          newValueOptions: {}
+        id: id
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleType'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
+    SecurityMonitoringRuleSeverity:
+      description: Severity of the Security Signal.
+      enum:
+      - info
+      - low
+      - medium
+      - high
+      - critical
+      type: string
+      x-enum-varnames:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+    SecurityMonitoringRuleType:
+      default: log_detection
+      description: Type of the rule.
+      enum:
+      - log_detection
+      - configuration
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
+      - CONFIGURATION
+    SecurityMonitoringRuleUpdatePayload:
+      description: Update an existing rule.
+      example:
+        cases:
+        - condition: condition
+          name: name
+          notifications:
+          - notifications
+          - notifications
+        - condition: condition
+          name: name
+          notifications:
+          - notifications
+          - notifications
+        hasExtendedTitle: true
+        isEnabled: true
+        name: name
+        options:
+          newValueOptions: {}
         filters:
         - query: query
         - query: query
@@ -10888,135 +11053,6 @@ components:
         tags:
         - tags
         - tags
-        creationAuthorId: 6
-        createdAt: 0
-        isDefault: true
-        isDeleted: true
-        isEnabled: true
-        name: name
-        options:
-          newValueOptions: {}
-        id: id
-      properties:
-        cases:
-          description: Cases for generating signals.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
-          type: array
-        createdAt:
-          description: When the rule was created, timestamp in milliseconds.
-          format: int64
-          type: integer
-        creationAuthorId:
-          description: User ID of the user who created the rule.
-          format: int64
-          type: integer
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
-        id:
-          description: The ID of the rule.
-          type: string
-        isDefault:
-          description: Whether the rule is included by default.
-          type: boolean
-        isDeleted:
-          description: Whether the rule has been deleted.
-          type: boolean
-        isEnabled:
-          description: Whether the rule is enabled.
-          type: boolean
-        message:
-          description: Message for generated signals.
-          type: string
-        name:
-          description: The name of the rule.
-          type: string
-        options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
-        queries:
-          description: Queries for selecting logs which are part of the rule.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
-          type: array
-        tags:
-          description: Tags for generated signals.
-          items:
-            description: Tag.
-            type: string
-          type: array
-        version:
-          description: The version of the rule.
-          format: int64
-          type: integer
-    SecurityMonitoringRuleSeverity:
-      description: Severity of the Security Signal.
-      enum:
-      - info
-      - low
-      - medium
-      - high
-      - critical
-      type: string
-      x-enum-varnames:
-      - INFO
-      - LOW
-      - MEDIUM
-      - HIGH
-      - CRITICAL
-    SecurityMonitoringRuleUpdatePayload:
-      description: Update an existing rule.
-      example:
-        cases:
-        - condition: condition
-          name: name
-          notifications:
-          - notifications
-          - notifications
-        - condition: condition
-          name: name
-          notifications:
-          - notifications
-          - notifications
-        isEnabled: true
-        name: name
-        options:
-          newValueOptions: {}
-        filters:
-        - query: query
-        - query: query
-        message: message
-        queries:
-        - distinctFields:
-          - distinctFields
-          - distinctFields
-          metric: metric
-          groupByFields:
-          - groupByFields
-          - groupByFields
-          query: query
-          name: name
-          agentRule:
-            expression: expression
-            agentRuleId: etc_shadow
-        - distinctFields:
-          - distinctFields
-          - distinctFields
-          metric: metric
-          groupByFields:
-          - groupByFields
-          - groupByFields
-          query: query
-          name: name
-          agentRule:
-            expression: expression
-            agentRuleId: etc_shadow
-        tags:
-        - tags
-        - tags
       properties:
         cases:
           description: Cases for generating signals.
@@ -11029,6 +11065,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           type: boolean
@@ -11051,6 +11092,12 @@ components:
             description: Tag.
             type: string
           type: array
+        version:
+          description: The version of the rule being updated.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     SecurityMonitoringRuntimeAgentRule:
       description: The Agent rule.

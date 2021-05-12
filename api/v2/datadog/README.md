@@ -438,6 +438,7 @@ Class | Method | HTTP request | Description
  - [SecurityMonitoringRuleQueryCreate](docs/SecurityMonitoringRuleQueryCreate.md)
  - [SecurityMonitoringRuleResponse](docs/SecurityMonitoringRuleResponse.md)
  - [SecurityMonitoringRuleSeverity](docs/SecurityMonitoringRuleSeverity.md)
+ - [SecurityMonitoringRuleType](docs/SecurityMonitoringRuleType.md)
  - [SecurityMonitoringRuleUpdatePayload](docs/SecurityMonitoringRuleUpdatePayload.md)
  - [SecurityMonitoringRuntimeAgentRule](docs/SecurityMonitoringRuntimeAgentRule.md)
  - [SecurityMonitoringSignal](docs/SecurityMonitoringSignal.md)

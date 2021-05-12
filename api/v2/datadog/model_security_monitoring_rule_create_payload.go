@@ -18,6 +18,8 @@ type SecurityMonitoringRuleCreatePayload struct {
 	Cases []SecurityMonitoringRuleCaseCreate `json:"cases"`
 	// Additional queries to filter matched events before they are processed.
 	Filters *[]SecurityMonitoringFilter `json:"filters,omitempty"`
+	// Whether the notifications include the triggering group-by values in their title.
+	HasExtendedTitle *bool `json:"hasExtendedTitle,omitempty"`
 	// Whether the rule is enabled.
 	IsEnabled bool `json:"isEnabled"`
 	// Message for generated signals.
@@ -28,7 +30,8 @@ type SecurityMonitoringRuleCreatePayload struct {
 	// Queries for selecting logs which are part of the rule.
 	Queries []SecurityMonitoringRuleQueryCreate `json:"queries"`
 	// Tags for generated signals.
-	Tags *[]string `json:"tags,omitempty"`
+	Tags *[]string                   `json:"tags,omitempty"`
+	Type *SecurityMonitoringRuleType `json:"type,omitempty"`
 }
 
 // NewSecurityMonitoringRuleCreatePayload instantiates a new SecurityMonitoringRuleCreatePayload object
@@ -43,6 +46,8 @@ func NewSecurityMonitoringRuleCreatePayload(cases []SecurityMonitoringRuleCaseCr
 	this.Name = name
 	this.Options = options
 	this.Queries = queries
+	var type_ SecurityMonitoringRuleType = SECURITYMONITORINGRULETYPE_LOG_DETECTION
+	this.Type = &type_
 	return &this
 }
 
@@ -51,6 +56,8 @@ func NewSecurityMonitoringRuleCreatePayload(cases []SecurityMonitoringRuleCaseCr
 // but it doesn't guarantee that properties required by API are set
 func NewSecurityMonitoringRuleCreatePayloadWithDefaults() *SecurityMonitoringRuleCreatePayload {
 	this := SecurityMonitoringRuleCreatePayload{}
+	var type_ SecurityMonitoringRuleType = SECURITYMONITORINGRULETYPE_LOG_DETECTION
+	this.Type = &type_
 	return &this
 }
 
@@ -108,6 +115,38 @@ func (o *SecurityMonitoringRuleCreatePayload) HasFilters() bool {
 // SetFilters gets a reference to the given []SecurityMonitoringFilter and assigns it to the Filters field.
 func (o *SecurityMonitoringRuleCreatePayload) SetFilters(v []SecurityMonitoringFilter) {
 	o.Filters = &v
+}
+
+// GetHasExtendedTitle returns the HasExtendedTitle field value if set, zero value otherwise.
+func (o *SecurityMonitoringRuleCreatePayload) GetHasExtendedTitle() bool {
+	if o == nil || o.HasExtendedTitle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.HasExtendedTitle
+}
+
+// GetHasExtendedTitleOk returns a tuple with the HasExtendedTitle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecurityMonitoringRuleCreatePayload) GetHasExtendedTitleOk() (*bool, bool) {
+	if o == nil || o.HasExtendedTitle == nil {
+		return nil, false
+	}
+	return o.HasExtendedTitle, true
+}
+
+// HasHasExtendedTitle returns a boolean if a field has been set.
+func (o *SecurityMonitoringRuleCreatePayload) HasHasExtendedTitle() bool {
+	if o != nil && o.HasExtendedTitle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHasExtendedTitle gets a reference to the given bool and assigns it to the HasExtendedTitle field.
+func (o *SecurityMonitoringRuleCreatePayload) SetHasExtendedTitle(v bool) {
+	o.HasExtendedTitle = &v
 }
 
 // GetIsEnabled returns the IsEnabled field value
@@ -262,6 +301,38 @@ func (o *SecurityMonitoringRuleCreatePayload) SetTags(v []string) {
 	o.Tags = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *SecurityMonitoringRuleCreatePayload) GetType() SecurityMonitoringRuleType {
+	if o == nil || o.Type == nil {
+		var ret SecurityMonitoringRuleType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecurityMonitoringRuleCreatePayload) GetTypeOk() (*SecurityMonitoringRuleType, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *SecurityMonitoringRuleCreatePayload) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given SecurityMonitoringRuleType and assigns it to the Type field.
+func (o *SecurityMonitoringRuleCreatePayload) SetType(v SecurityMonitoringRuleType) {
+	o.Type = &v
+}
+
 func (o SecurityMonitoringRuleCreatePayload) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -269,6 +340,9 @@ func (o SecurityMonitoringRuleCreatePayload) MarshalJSON() ([]byte, error) {
 	}
 	if o.Filters != nil {
 		toSerialize["filters"] = o.Filters
+	}
+	if o.HasExtendedTitle != nil {
+		toSerialize["hasExtendedTitle"] = o.HasExtendedTitle
 	}
 	if true {
 		toSerialize["isEnabled"] = o.IsEnabled
@@ -287,6 +361,9 @@ func (o SecurityMonitoringRuleCreatePayload) MarshalJSON() ([]byte, error) {
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
+	}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
 	}
 	return json.Marshal(toSerialize)
 }

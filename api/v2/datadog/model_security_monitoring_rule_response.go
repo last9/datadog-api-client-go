@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 )
 
-// SecurityMonitoringRuleResponse Detection rule.
+// SecurityMonitoringRuleResponse Rule.
 type SecurityMonitoringRuleResponse struct {
 	// Cases for generating signals.
 	Cases *[]SecurityMonitoringRuleCase `json:"cases,omitempty"`
@@ -22,6 +22,8 @@ type SecurityMonitoringRuleResponse struct {
 	CreationAuthorId *int64 `json:"creationAuthorId,omitempty"`
 	// Additional queries to filter matched events before they are processed.
 	Filters *[]SecurityMonitoringFilter `json:"filters,omitempty"`
+	// Whether the notifications include the triggering group-by values in their title.
+	HasExtendedTitle *bool `json:"hasExtendedTitle,omitempty"`
 	// The ID of the rule.
 	Id *string `json:"id,omitempty"`
 	// Whether the rule is included by default.
@@ -38,7 +40,10 @@ type SecurityMonitoringRuleResponse struct {
 	// Queries for selecting logs which are part of the rule.
 	Queries *[]SecurityMonitoringRuleQuery `json:"queries,omitempty"`
 	// Tags for generated signals.
-	Tags *[]string `json:"tags,omitempty"`
+	Tags *[]string                   `json:"tags,omitempty"`
+	Type *SecurityMonitoringRuleType `json:"type,omitempty"`
+	// User ID of the user who updated the rule.
+	UpdateAuthorId *int64 `json:"updateAuthorId,omitempty"`
 	// The version of the rule.
 	Version *int64 `json:"version,omitempty"`
 }
@@ -49,6 +54,8 @@ type SecurityMonitoringRuleResponse struct {
 // will change when the set of required properties is changed
 func NewSecurityMonitoringRuleResponse() *SecurityMonitoringRuleResponse {
 	this := SecurityMonitoringRuleResponse{}
+	var type_ SecurityMonitoringRuleType = SECURITYMONITORINGRULETYPE_LOG_DETECTION
+	this.Type = &type_
 	return &this
 }
 
@@ -57,6 +64,8 @@ func NewSecurityMonitoringRuleResponse() *SecurityMonitoringRuleResponse {
 // but it doesn't guarantee that properties required by API are set
 func NewSecurityMonitoringRuleResponseWithDefaults() *SecurityMonitoringRuleResponse {
 	this := SecurityMonitoringRuleResponse{}
+	var type_ SecurityMonitoringRuleType = SECURITYMONITORINGRULETYPE_LOG_DETECTION
+	this.Type = &type_
 	return &this
 }
 
@@ -186,6 +195,38 @@ func (o *SecurityMonitoringRuleResponse) HasFilters() bool {
 // SetFilters gets a reference to the given []SecurityMonitoringFilter and assigns it to the Filters field.
 func (o *SecurityMonitoringRuleResponse) SetFilters(v []SecurityMonitoringFilter) {
 	o.Filters = &v
+}
+
+// GetHasExtendedTitle returns the HasExtendedTitle field value if set, zero value otherwise.
+func (o *SecurityMonitoringRuleResponse) GetHasExtendedTitle() bool {
+	if o == nil || o.HasExtendedTitle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.HasExtendedTitle
+}
+
+// GetHasExtendedTitleOk returns a tuple with the HasExtendedTitle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecurityMonitoringRuleResponse) GetHasExtendedTitleOk() (*bool, bool) {
+	if o == nil || o.HasExtendedTitle == nil {
+		return nil, false
+	}
+	return o.HasExtendedTitle, true
+}
+
+// HasHasExtendedTitle returns a boolean if a field has been set.
+func (o *SecurityMonitoringRuleResponse) HasHasExtendedTitle() bool {
+	if o != nil && o.HasExtendedTitle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHasExtendedTitle gets a reference to the given bool and assigns it to the HasExtendedTitle field.
+func (o *SecurityMonitoringRuleResponse) SetHasExtendedTitle(v bool) {
+	o.HasExtendedTitle = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -476,6 +517,70 @@ func (o *SecurityMonitoringRuleResponse) SetTags(v []string) {
 	o.Tags = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *SecurityMonitoringRuleResponse) GetType() SecurityMonitoringRuleType {
+	if o == nil || o.Type == nil {
+		var ret SecurityMonitoringRuleType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecurityMonitoringRuleResponse) GetTypeOk() (*SecurityMonitoringRuleType, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *SecurityMonitoringRuleResponse) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given SecurityMonitoringRuleType and assigns it to the Type field.
+func (o *SecurityMonitoringRuleResponse) SetType(v SecurityMonitoringRuleType) {
+	o.Type = &v
+}
+
+// GetUpdateAuthorId returns the UpdateAuthorId field value if set, zero value otherwise.
+func (o *SecurityMonitoringRuleResponse) GetUpdateAuthorId() int64 {
+	if o == nil || o.UpdateAuthorId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.UpdateAuthorId
+}
+
+// GetUpdateAuthorIdOk returns a tuple with the UpdateAuthorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecurityMonitoringRuleResponse) GetUpdateAuthorIdOk() (*int64, bool) {
+	if o == nil || o.UpdateAuthorId == nil {
+		return nil, false
+	}
+	return o.UpdateAuthorId, true
+}
+
+// HasUpdateAuthorId returns a boolean if a field has been set.
+func (o *SecurityMonitoringRuleResponse) HasUpdateAuthorId() bool {
+	if o != nil && o.UpdateAuthorId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateAuthorId gets a reference to the given int64 and assigns it to the UpdateAuthorId field.
+func (o *SecurityMonitoringRuleResponse) SetUpdateAuthorId(v int64) {
+	o.UpdateAuthorId = &v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *SecurityMonitoringRuleResponse) GetVersion() int64 {
 	if o == nil || o.Version == nil {
@@ -522,6 +627,9 @@ func (o SecurityMonitoringRuleResponse) MarshalJSON() ([]byte, error) {
 	if o.Filters != nil {
 		toSerialize["filters"] = o.Filters
 	}
+	if o.HasExtendedTitle != nil {
+		toSerialize["hasExtendedTitle"] = o.HasExtendedTitle
+	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
@@ -548,6 +656,12 @@ func (o SecurityMonitoringRuleResponse) MarshalJSON() ([]byte, error) {
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
+	}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
+	}
+	if o.UpdateAuthorId != nil {
+		toSerialize["updateAuthorId"] = o.UpdateAuthorId
 	}
 	if o.Version != nil {
 		toSerialize["version"] = o.Version
