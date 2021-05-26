@@ -1051,6 +1051,12 @@
       "type": "safe"
     }
   },
+  "GetUsageAuditLogs": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "GetUsageLambda": {
     "tag": "Usage Metering",
     "undo": {
@@ -1063,7 +1069,7 @@
       "type": "safe"
     }
   },
-  "GetUsageComplianceMonitoring": {
+  "GetUsageCloudSecurityPostureManagement": {
     "tag": "Usage Metering",
     "undo": {
       "type": "safe"
