@@ -1081,6 +1081,12 @@
       "type": "safe"
     }
   },
+  "GetUsageCWS": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "GetUsageFargate": {
     "tag": "Usage Metering",
     "undo": {

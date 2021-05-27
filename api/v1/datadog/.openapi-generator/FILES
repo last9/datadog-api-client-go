@@ -524,6 +524,8 @@ docs/UsageBillableSummaryBody.md
 docs/UsageBillableSummaryHour.md
 docs/UsageBillableSummaryKeys.md
 docs/UsageBillableSummaryResponse.md
+docs/UsageCWSHour.md
+docs/UsageCWSResponse.md
 docs/UsageComplianceHour.md
 docs/UsageComplianceResponse.md
 docs/UsageCustomReportsAttributes.md
@@ -1112,6 +1114,8 @@ model_usage_custom_reports_data.go
 model_usage_custom_reports_meta.go
 model_usage_custom_reports_page.go
 model_usage_custom_reports_response.go
+model_usage_cws_hour.go
+model_usage_cws_response.go
 model_usage_fargate_hour.go
 model_usage_fargate_response.go
 model_usage_host_hour.go

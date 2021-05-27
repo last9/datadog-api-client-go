@@ -243,6 +243,7 @@ Class | Method | HTTP request | Description
 *UsageMeteringApi* | [**GetUsageAnalyzedLogs**](docs/UsageMeteringApi.md#getusageanalyzedlogs) | **Get** /api/v1/usage/analyzed_logs | Get hourly usage for analyzed logs
 *UsageMeteringApi* | [**GetUsageAttribution**](docs/UsageMeteringApi.md#getusageattribution) | **Get** /api/v1/usage/attribution | Get Usage Attribution
 *UsageMeteringApi* | [**GetUsageBillableSummary**](docs/UsageMeteringApi.md#getusagebillablesummary) | **Get** /api/v1/usage/billable-summary | Get billable usage across your account
+*UsageMeteringApi* | [**GetUsageCWS**](docs/UsageMeteringApi.md#getusagecws) | **Get** /api/v1/usage/cws | Get hourly usage for Cloud Workload Security
 *UsageMeteringApi* | [**GetUsageComplianceMonitoring**](docs/UsageMeteringApi.md#getusagecompliancemonitoring) | **Get** /api/v1/usage/compliance-monitoring | Get hourly usage for Compliance Monitoring
 *UsageMeteringApi* | [**GetUsageFargate**](docs/UsageMeteringApi.md#getusagefargate) | **Get** /api/v1/usage/fargate | Get hourly usage for Fargate
 *UsageMeteringApi* | [**GetUsageHosts**](docs/UsageMeteringApi.md#getusagehosts) | **Get** /api/v1/usage/hosts | Get hourly usage for hosts and containers
@@ -736,6 +737,8 @@ Class | Method | HTTP request | Description
  - [UsageBillableSummaryHour](docs/UsageBillableSummaryHour.md)
  - [UsageBillableSummaryKeys](docs/UsageBillableSummaryKeys.md)
  - [UsageBillableSummaryResponse](docs/UsageBillableSummaryResponse.md)
+ - [UsageCWSHour](docs/UsageCWSHour.md)
+ - [UsageCWSResponse](docs/UsageCWSResponse.md)
  - [UsageComplianceHour](docs/UsageComplianceHour.md)
  - [UsageComplianceResponse](docs/UsageComplianceResponse.md)
  - [UsageCustomReportsAttributes](docs/UsageCustomReportsAttributes.md)

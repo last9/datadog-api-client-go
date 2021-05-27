@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**GetUsageAnalyzedLogs**](UsageMeteringApi.md#GetUsageAnalyzedLogs) | **Get** /api/v1/usage/analyzed_logs | Get hourly usage for analyzed logs
 [**GetUsageAttribution**](UsageMeteringApi.md#GetUsageAttribution) | **Get** /api/v1/usage/attribution | Get Usage Attribution
 [**GetUsageBillableSummary**](UsageMeteringApi.md#GetUsageBillableSummary) | **Get** /api/v1/usage/billable-summary | Get billable usage across your account
+[**GetUsageCWS**](UsageMeteringApi.md#GetUsageCWS) | **Get** /api/v1/usage/cws | Get hourly usage for Cloud Workload Security
 [**GetUsageComplianceMonitoring**](UsageMeteringApi.md#GetUsageComplianceMonitoring) | **Get** /api/v1/usage/compliance-monitoring | Get hourly usage for Compliance Monitoring
 [**GetUsageFargate**](UsageMeteringApi.md#GetUsageFargate) | **Get** /api/v1/usage/fargate | Get hourly usage for Fargate
 [**GetUsageHosts**](UsageMeteringApi.md#GetUsageHosts) | **Get** /api/v1/usage/hosts | Get hourly usage for hosts and containers
@@ -819,6 +820,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UsageBillableSummaryResponse**](UsageBillableSummaryResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth), [appKeyAuth](../README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json;datetime-format=rfc3339
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUsageCWS
+
+> UsageCWSResponse GetUsageCWS(ctx, startHr, datadog.GetUsageCWSOptionalParameters{})
+
+Get hourly usage for Cloud Workload Security.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "os"
+    "time"
+    datadog "github.com/DataDog/datadog-api-client-go/api/v1/datadog"
+)
+
+func main() {
+    ctx := datadog.NewDefaultContext(context.Background())
+
+    startHr := time.Now() // time.Time | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
+    endHr := time.Now() // time.Time | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour. (optional)
+    optionalParams := datadog.GetUsageCWSOptionalParameters{
+        EndHr: &endHr,
+    }
+
+    configuration := datadog.NewConfiguration()
+
+    apiClient := datadog.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsageMeteringApi.GetUsageCWS(ctx, startHr, optionalParams)
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsageMeteringApi.GetUsageCWS`: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetUsageCWS`: UsageCWSResponse
+    responseContent, _ := json.MarshalIndent(resp, "", "  ")
+    fmt.Fprintf(os.Stdout, "Response from UsageMeteringApi.GetUsageCWS:\n%s\n", responseContent)
+}
+```
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+---- | ---- | ------------ | ------
+**ctx** | **context.Context** | Context for authentication, logging, cancellation, deadlines, tracing, etc. |
+**startHr** | **time.Time** | Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage beginning at this hour. | 
+
+
+### Optional Parameters
+
+
+Other parameters are passed through a pointer to a GetUsageCWSOptionalParameters struct.
+
+
+Name | Type | Description  | Notes
+---- | ---- | ------------ | ------
+**endHr** | **time.Time** | Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage ending **before** this hour. | 
+
+### Return type
+
+[**UsageCWSResponse**](UsageCWSResponse.md)
 
 ### Authorization
 
